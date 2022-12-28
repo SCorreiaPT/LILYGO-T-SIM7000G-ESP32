@@ -1,2 +1,2 @@
 # LILYGO-T-SIM7000G-ESP32
-Getting Started with LILYGO T-SIM7000G ESP32 (LTE, GPRS, and GPS)
+Getting Started with LILYGO T-SIM7000G ESP32 (LTE, GPRS, and GPS) Version 1.1
