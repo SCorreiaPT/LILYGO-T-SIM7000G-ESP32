@@ -1,0 +1,18 @@
+/*
+ * HardwareTest.cpp
+ *
+ * Created: 23/07/2023 19:16:10
+ * Author : scorr
+ */ 
+
+#include <avr/io.h>
+
+
+int main(void)
+{
+    /* Replace with your application code */
+    while (1) 
+    {
+    }
+}
+
