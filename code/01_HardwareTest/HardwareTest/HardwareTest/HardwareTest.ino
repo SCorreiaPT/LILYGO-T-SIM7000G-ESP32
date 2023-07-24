@@ -1,6 +1,25 @@
-
-
-
+/************************************************************************************/
+/* Script for testing LILYGO-T-SIM7000G ESP32 Module								*/
+/*																					*/
+/* LTE, GPRS, and GPS, within an ESP32 Microcontroller,	also features a microSD		*/
+/* card slot, battery holder, and charger, with a WROVER-B Module					*/
+/* (240MHz dual-core processor), 4MB Flash memory, 8MB PSRAM, and 520 KB SRAM.		*/
+/*																					*/
+/* Developed at:																	*/
+/* Laboratory of Electronics and Instrumentation,									*/
+/* Portalegre Polytechnic University, Portalegre, Portugal							*/
+/*																					*/
+/* Library Dependencies																*/
+/*																					*/
+/*																					*/
+/*																					*/
+/* @author Prof. Sergio D. Correia													*/
+/* @date July, 2023																	*/
+/* @version 0.0																		*/
+/* @file HardwareTest.ino															*/
+/* @see https://sites.google.com/ipportalegre.pt/scorreia/home						*/
+/*																					*/
+/************************************************************************************/
 #include "arduino.h"
 
 #define TINY_GSM_MODEM_SIM7000
@@ -38,6 +57,8 @@ const char gprsUser[] = "";
 const char gprsPass[] = "";
 
 bool reply = false;
+
+
 TinyGsm modem(SerialAT);
 TinyGsmClient client(modem);
 
@@ -85,6 +106,7 @@ void setup() {
 	
 	// Initializes the GSM modem
 	SerialDEBUG.println();
+	
 	// Sets up the modem power pin
 	SerialDEBUG.print("Powering GSM Modem ... ");
 	pinMode(PWR_PIN, OUTPUT);
@@ -141,7 +163,7 @@ void setup() {
 	SerialDEBUG.print("Signal quality:");
 	SerialDEBUG.println(modem.getSignalQuality());
 	
-	// GPRS Connection
+	// Sets the GPRS Connection
 	SerialDEBUG.print(F("Connecting to "));
 	SerialDEBUG.print(apn);
 	SerialDEBUG.print(" ...");
@@ -165,15 +187,19 @@ void setup() {
 
 void loop() {
 
-
+	// Sends messages from MODEM to the SERIALDEBUG
 	if (SerialAT.available()) {
 		SerialDEBUG.write(SerialAT.read());
 	}
+	
+	// Sends commmmands from the SERIALDEBUG to the MODEM
 	if (SerialDEBUG.available()) {
 		char buf = SerialDEBUG.read();
 		SerialAT.write(buf);
 		SerialDEBUG.write(buf);
 	}
+	
+	// Main cycle delay
 	delay(1);
 
 }
